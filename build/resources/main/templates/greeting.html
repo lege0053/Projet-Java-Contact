@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mes contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Mes contacts</h1>
+<tr th:each="e : ${contactList}">
+    <td th:text="${e.firstName} + ' ' + ${e.lastName} "/><br/>
+</tr>
+</body>
+</html>
