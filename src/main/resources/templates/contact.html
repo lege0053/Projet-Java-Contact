@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mes contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Mes contacts</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="contact, iter : ${contactList}">
+            <form th:action="@{/modifier/{id}(id=${contact.id})}" method="post">
+                <td th:text="${iter.index + 1}"></td>
+                <td><input type="text" name="lastName" th:value="${contact.lastName}" required /></td>
+                <td><input type="text" name="firstName" th:value="${contact.firstName}" required /></td>
+                <td>
+                    <input type="submit" value="Modifier" />
+                    <a th:href="@{/supprimer/{id}(id=${contact.id})}">Supprimer</a>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+    <div th:if="${updatedContact}">
+        <p style="color: green">Contact modifié avec succès !</p>
+    </div>
+
+    <h1>Nouveau contact</h1>
+    <form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">
+        <p>Nom: <input type="text" name="lastName" required /></p>
+        <p>Prénom: <input type="text" name="firstName" required /></p>
+        <p><input type="submit" value="Ajouter" /> <input type="reset" value="Reset" /></p>
+    </form>
+
+    <div th:if="${addedContact}">
+        <p style="color: green">Contact ajouté avec succès !</p>
+    </div>
+</body>
+</html>
