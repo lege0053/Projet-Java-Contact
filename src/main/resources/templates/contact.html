@@ -34,7 +34,7 @@
     <form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">
         <p>Nom: <input type="text" name="lastName" required /></p>
         <p>Prénom: <input type="text" name="firstName" required /></p>
-        <p><input type="submit" value="Ajouter" /> <input type="reset" value="Reset" /></p>
+        <p><input type="submit" value="Ajouter" /> <input type="reset" value="Effacer" /></p>
     </form>
 
     <div th:if="${addedContact}">

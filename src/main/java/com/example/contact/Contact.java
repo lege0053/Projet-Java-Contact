@@ -1,9 +1,11 @@
 package com.example.contact;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Contact {
@@ -13,6 +15,16 @@ public class Contact {
     private Long id;
     private String firstName;
     private String lastName;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "contact_address",
+            joinColumns = @JoinColumn(name = "contact_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    private Set<Address> addresses = new HashSet<>();
+
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private Set<Email> emails = new HashSet<>();
 
     protected Contact() {}
 
@@ -48,6 +60,42 @@ public class Contact {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public Set<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(Set<Email> emails) {
+        this.emails = emails;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.getContacts().add(this);
+    }
+
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.getContacts().remove(this);
+    }
+
+    public void addEmail(Email email) {
+        emails.add(email);
+        email.setContact(this);
+    }
+
+    public void removeEmail(Email email) {
+        emails.remove(email);
+        email.setContact(null);
     }
 
 }
