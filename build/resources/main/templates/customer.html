@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mes contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Mes contacts</h1>
+<tr th:each="e, index : ${contactList}">
+    <td th:text="${index.index + 1} + '. ' +${e.firstName} + ' ' + ${e.lastName}"/>
+    <td><a th:href="@{/supprimer/{id}(id=${e.id})}">Supprimer</a></td>
+    <br />
+</tr>
+
+<h1>Nouveau contact</h1>
+<form action="#" th:action="@{/nouveau}" th:object="${customer}" method="post">
+    <p>Nom: <input type="text" name="lastName" required /></p>
+    <p>Prénom: <input type="text" name="firstName" required /></p>
+    <p><input type="submit" value="Ajouter" /> <input type="reset" value="Reset" /></p>
+</form>
+<div th:if="${addedContact}">
+    <p style="color: green">Contact ajouté avec succès !</p>
+</div>
+
+</body>
+</html>
