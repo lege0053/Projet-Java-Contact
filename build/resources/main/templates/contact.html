@@ -9,6 +9,8 @@
 <style>
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
 /* Define the table styles */
@@ -19,15 +21,15 @@ table {
 
 td, th {
   border: 1px solid #ddd;
-  padding: 5px;
+  padding: 10px;
 }
 
 th {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   text-align: left;
-  background-color: #2b2d42;
-  color: white;
+  background-color: #1d3557;
+  color: #fff;
 }
 
 /* Define the form styles */
@@ -40,14 +42,15 @@ form > * {
   margin: 5px;
 }
 
-input[type="text"], input[type="submit"], input[type="reset"], .btn-connexion {
+input[type="text"], input[type="submit"], input[type="reset"], .btn-connexion, .a-supprimer {
   padding: 10px;
   font-size: 16px;
   box-sizing: border-box;
   border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-input[type="submit"], input[type="reset"], .btn-connexion  {
+input[type="submit"], input[type="reset"], .btn-connexion, .a-supprimer  {
   border: none;
 }
 
@@ -57,13 +60,13 @@ input[type="text"] {
 
 input[type="submit"], .btn-connexion {
   background-color: #3cb371;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 
 input[type="reset"] {
   background-color: #ff6347;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -77,8 +80,26 @@ input[type="reset"]:hover {
 
 /* Define the success message styles */
 .success-message {
-  color: green;
+  color: #2b2d42;
+  background-color: #dfe3eb;
+  border: 1px solid #cfd3d9;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 8px;
 }
+
+.a-supprimer {
+  background-color: #e63946;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.a-supprimer:hover {
+  background-color: #b91c1c;
+}
+
 </style>
 
 <body>
@@ -116,7 +137,7 @@ input[type="reset"]:hover {
                 <td><input style="width: 100%; border: none;" type="text" name="firstName" th:value="${contact.firstName}" required /></td>
                 <td>
                     <input type="submit" value="Modifier" />
-                    <a th:href="@{/supprimer/{id}(id=${contact.id})}">Supprimer</a>
+                    <a class="a-supprimer" th:href="@{/supprimer/{id}(id=${contact.id})}">Supprimer</a>
                 </td>
             </form>
         </tr>

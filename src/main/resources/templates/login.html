@@ -2,82 +2,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Connexion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px #ddd;
+            margin: 50px auto;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        form h1 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #3cb371;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2e8b57;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-submit {
+            text-align: center;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #F7F7F7;
-    }
-    form {
-        background-color: #FFFFFF;
-        border: 1px solid #E5E5E5;
-        padding: 20px;
-        width: 400px;
-        margin: 0 auto;
-        margin-top: 50px;
-        box-shadow: 0px 0px 10px #E5E5E5;
-    }
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
-    input[type="text"],
-    input[type="password"] {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 10px;
-        border: 1px solid #E5E5E5;
-        border-radius: 3px;
-        margin-bottom: 20px;
-        font-size: 16px;
-    }
-    input[type="submit"] {
-        background-color: #008CBA;
-        color: #FFFFFF;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 3px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-    input[type="submit"]:hover {
-        background-color: #006F8E;
-    }
-    .error {
-        color: red;
-        font-weight: bold;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        text-align: center;
-    }
-    .success {
-        color: green;
-        font-weight: bold;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        text-align: center;
-    }
-
-    .form-submit {
-        text-align: center;
-    }
-</style>
-
 <body>
-
 <form th:action="@{/login}" method="post">
+    <h1>Connexion</h1>
     <label>User Name</label>
-    <input type="text" name="username" required/>
+    <input type="text" name="username" required />
     <label>Mot de passe</label>
-    <input type="password" name="password" required/>
+    <input type="password" name="password" required />
     <div class="form-submit">
-        <input type="submit" value="Connexion"/>
+        <input type="submit" value="Se connecter" />
     </div>
 </form>
-
 <div class="error" th:if="${param.error}">
-    Username ou mot de passe invalide.
+    Nom d'utilisateur ou mot de passe invalide.
 </div>
 <div class="success" th:if="${param.logout}">
     Vous êtes déconnecté.
