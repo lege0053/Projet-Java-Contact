@@ -41,8 +41,12 @@ public class ContactController {
     }
 
     @GetMapping("/supprimer/{id}")
-    public String deleteContact(@PathVariable("id") Long id, Model model) {
+    public String deleteContact(@PathVariable("id") Long id, Model model,RedirectAttributes redirectAttributes) {
         contactRepository.deleteById(id);
+
+        // Ajouter un flash attribute pour indiquer que le message de succès doit être affiché
+        redirectAttributes.addFlashAttribute("deletedContact", true);
+
         model.addAttribute("message", "Le contact a été supprimé avec succès !");
         return "redirect:/contact";
     }
