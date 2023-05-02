@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,9 +25,15 @@ public class XmlController {
     public Contact getContactById(Long id) {
         return contactRepository.findById(id).orElse(null);
     }
-/*
-    @DeleteMapping(params = {"action=delContact", "id"}, produces = MediaType.APPLICATION_XML_VALUE)
-    public void deleteContactById(@RequestParam Long id) {
-        contactRepository.deleteById(id);
-    }*/
+
+    @GetMapping(params = {"action=delContact", "id"})
+    public ResponseEntity<String> deleteContactById(@RequestParam("id") Long id) {
+        Optional<Contact> contactOptional = contactRepository.findById(id);
+        if (contactOptional.isPresent()) {
+            contactRepository.deleteById(id);
+            return ResponseEntity.ok("Contact d'id " + id + " supprimé avec succès.");
+        } else {
+            return ResponseEntity.ok("Contact d'id " + id + " introuvable.");
+        }
+    }
 }
