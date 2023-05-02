@@ -13,6 +13,17 @@
     <input type="submit" value="Se déconnecter"/>
 </form>
 
+<h1>Nouveau contact</h1>
+<form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">
+    <p>Nom: <input type="text" name="lastName" required /></p>
+    <p>Prénom: <input type="text" name="firstName" required /></p>
+    <p><input type="submit" value="Ajouter" /> <input type="reset" value="Effacer" /></p>
+</form>
+
+<div th:if="${addedContact}" class="success-message">
+    <p>Contact ajouté avec succès !</p>
+</div>
+
 <h1>Mes contacts</h1>
     <table>
         <tr>
@@ -38,15 +49,5 @@
         <p>Contact modifié avec succès !</p>
     </div>
 
-    <h1>Nouveau contact</h1>
-    <form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">
-        <p>Nom: <input type="text" name="lastName" required /></p>
-        <p>Prénom: <input type="text" name="firstName" required /></p>
-        <p><input type="submit" value="Ajouter" /> <input type="reset" value="Effacer" /></p>
-    </form>
-
-    <div th:if="${addedContact}" class="success-message">
-        <p>Contact ajouté avec succès !</p>
-    </div>
 </body>
 </html>
