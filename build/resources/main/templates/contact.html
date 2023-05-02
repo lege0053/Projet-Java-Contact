@@ -40,14 +40,14 @@ form > * {
   margin: 5px;
 }
 
-input[type="text"], input[type="submit"], input[type="reset"] {
+input[type="text"], input[type="submit"], input[type="reset"], .btn-connexion {
   padding: 10px;
   font-size: 16px;
   box-sizing: border-box;
   border: 1px solid #ccc;
 }
 
-input[type="submit"], input[type="reset"] {
+input[type="submit"], input[type="reset"], .btn-connexion  {
   border: none;
 }
 
@@ -55,7 +55,7 @@ input[type="text"] {
   flex: 1;
 }
 
-input[type="submit"] {
+input[type="submit"], .btn-connexion {
   background-color: #3cb371;
   color: white;
   cursor: pointer;
@@ -67,7 +67,7 @@ input[type="reset"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .btn-connexion:hover {
   background-color: #2e8b57;
 }
 
@@ -83,10 +83,12 @@ input[type="reset"]:hover {
 
 <body>
 
-<h1 th:inline="text">Vous êtes connecté <span th:remove="tag" sec:authentication="name">thymeleaf</span> !</h1>
-<form th:action="@{/logout}" method="post">
+<h1 th:inline="text" sec:authorize="isAuthenticated()">Vous êtes connecté <span th:remove="tag" sec:authentication="name">thymeleaf</span> !</h1>
+<h1 th:inline="text" sec:authorize="isAnonymous()">Vous n'êtes pas connecté</h1>
+<form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
     <input type="submit" value="Se déconnecter"/>
 </form>
+<a sec:authorize="isAnonymous()" href="/login"><button class="btn-connexion">Se connecter</button></a>
 
 <h1>Nouveau contact</h1>
 <form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">

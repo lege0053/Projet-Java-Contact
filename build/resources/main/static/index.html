@@ -1,10 +1,39 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Index</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        a {
+            color: #008cba;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<p>Mes contacts <a href="/contact">ici</a></p>
+<div class="container">
+    <h1>Bienvenue sur ma page de contacts</h1>
+    <p>Cliquez sur le bouton ci-dessous pour accéder à la liste de mes contacts :</p>
+    <a href="/contact"><button style="font-size: 24px; padding: 10px 20px; background-color: #008cba; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Voir mes contacts</button></a>
+</div>
 </body>
 </html>
