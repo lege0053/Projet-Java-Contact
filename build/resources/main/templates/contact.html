@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Mes contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1 th:inline="text">Vous êtes connecté <span th:remove="tag" sec:authentication="name">thymeleaf</span> !</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Se déconnecter"/>
+</form>
+
+<h1>Nouveau contact</h1>
+<form action="#" th:action="@{/nouveau}" th:object="${contact}" method="post">
+    <p>Nom: <input type="text" name="lastName" required /></p>
+    <p>Prénom: <input type="text" name="firstName" required /></p>
+    <p><input type="submit" value="Ajouter" /> <input type="reset" value="Effacer" /></p>
+</form>
+
+<div th:if="${addedContact}" class="success-message">
+    <p>Contact ajouté avec succès !</p>
+</div>
+
+<h1>Mes contacts</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="contact, iter : ${contactList}">
+            <form th:action="@{/modifier/{id}(id=${contact.id})}" method="post">
+                <td th:text="${iter.index + 1}"></td>
+                <td><input style="width: 100%; border: none;" type="text" name="lastName" th:value="${contact.lastName}" required /></td>
+                <td><input style="width: 100%; border: none;" type="text" name="firstName" th:value="${contact.firstName}" required /></td>
+                <td>
+                    <input type="submit" value="Modifier" />
+                    <a th:href="@{/supprimer/{id}(id=${contact.id})}">Supprimer</a>
+                </td>
+            </form>
+        </tr>
+    </table>
+
+    <div th:if="${updatedContact}" class="success-message">
+        <p>Contact modifié avec succès !</p>
+    </div>
+
+</body>
+</html>
